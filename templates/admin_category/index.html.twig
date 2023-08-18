@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+
+{% block body %}
+    <h1>Category index</h1>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-2">Id</th>
+                <th class="col-6">Nom</th>
+                <th class="col-4">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a class="btn btn-outline-primary" href="{{ path('app_admin_category_edit', {'id': category.id}) }}">Modifier</a>
+                    <a class="btn btn-outline-danger" href="{{ path('app_admin_category_delete', {'id': category.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    <a href="{{ path('app_admin_category_new') }}">Create new</a>
+{% endblock %}
