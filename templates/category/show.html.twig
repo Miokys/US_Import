@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block body %}
+    <h1 class="text-center fs-2 m-4">Categorie {{ category.name }}</h1>  
+  
+    <div class="container d-flex justify-content-around">
+        {% for product in products %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.brand }} {{ product.model }} {{ product.year }}</h5>
+                    <p class="card-text">{{ product.shortDescription }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ product.price|number_format(0, " "," ") }} €</li>
+                </ul>
+                <div class="card-body">
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-outline-primary">Voir le vehicule</a>
+                </div>
+            </div>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+    </div>
+    <div class="container m-5">
+        <a class="btn btn-outline-secondary col-8" href="{{ path('app_category_index') }}">Retour à la liste</a>
+    </div>
+{% endblock %}

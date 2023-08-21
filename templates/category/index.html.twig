@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Catégories{% endblock %}
+
+{% block body %}
+    <h1 class="text-center m-3">Liste des Catégories</h1>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr class="text-end">
+                <td>{{ category.name }}</td>
+                <td class=" d-flex justify-content-center">
+                    <a class="btn btn-outline-info" href="{{ path('app_category_show', {'id': category.id}) }}">Voir les Articles</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune Catégorie disponible</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

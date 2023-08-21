@@ -1,0 +1,125 @@
+.navbar{
+    background: url('../medias/img/bannière.png') no-repeat;
+    background-size: cover;
+}
+
+.banner-img{
+    max-width: 25rem;
+}
+
+.navimg{
+    max-width: 300px;
+}
+.btn-cart, .btn-log{
+    border: solid 2px rgb(255, 255, 255);
+    border-radius: 5px;
+    backdrop-filter: blur(20px);
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: aliceblue;
+    font-weight: bolder;
+    text-decoration: none;
+    transition: 0.5s;
+    margin: 0 0.5rem 0 0.5rem;
+    min-width: fit-content;
+}
+
+.btn-cart{
+    background: rgba(255, 255, 255, 0.692);
+    color: black;
+}
+
+.btn-log:hover{
+    background-color: rgba(5, 5, 173, 0.872);
+    border: solid 2px rgba(5, 5, 173, 0.872);
+}
+
+.btn-cart:hover{
+    background-color: rgba(255, 255, 255, 0.872);
+    border: solid 2px rgba(255, 255, 255, 0.872);
+    color: rgba(5, 5, 173, 0.872);
+}
+
+@media screen and (max-width: 990px) {
+      .navbar-collapse{
+          justify-content: center;
+          background: rgba(10, 10, 193, 0.648);
+          background-size: cover;
+          border-radius: 5px;
+          border: solid white 2px;
+          backdrop-filter: blur(20px);
+      }
+}
+
+.nav-form{
+    margin-left: 0;
+    display: flex;
+    margin: 0;
+}
+.nav-form-input{
+    border: 2px solid rgb(255, 255, 255);
+    border-right: 0;
+    border-radius: 5px 0 0 5px;
+    width: 30vw;
+    height: 40px;
+    padding-left: 2rem;
+    background: #1e212698;
+    backdrop-filter: blur(20px);
+    font-size: larger;
+    margin-right: 0;
+}
+
+.nav-form-input:focus{
+    outline: none;
+}
+
+.nav-form-input::placeholder{
+    color: white;
+}
+
+.nav-form-btn{
+    margin: 0 0 1px 0;
+    border: solid 2px rgb(255, 255, 255);
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+    width: 3rem;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.872);
+    color: black;
+}
+
+.nav-form-btn:hover{
+    background-color: #930101b3;
+}
+
+.nav-btn{
+    display: flex;
+}
+
+@media screen and (max-width: 400px) {
+    .navimg{
+        max-width: 200px;
+    }
+}
+
+@media screen and (max-width: 1440px){
+
+    .nav-form{
+        margin: auto;
+        width: 80%;
+    }
+
+    .nav-form-input{
+        width: 100%;
+    }
+    
+    .nav-btn{
+        flex-direction: column;
+        margin: 1rem;
+    }
+
+    .btn-cart, .btn-log{
+        width: 100%;
+        margin: 0.5rem 0 0 0;
+    }
+}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LookupController!{% endblock %}
+
+{% block body %}
+    <div class="container d-flex justify-content-around my-5">
+        {% for product in products %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.brand }} {{ product.model }} {{ product.year }}</h5>
+                    <p class="card-text">{{ product.shortDescription }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ product.price|number_format(0, " "," ") }} €</li>
+                </ul>
+                <div class="card-body">
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-outline-primary">Voir le vehicule</a>
+                </div>
+            </div>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+    </div>
+{% endblock %}

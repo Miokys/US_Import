@@ -26,7 +26,7 @@
                 <td>{{ product.brand }}</td>
                 <td>{{ product.model }}</td>
                 <td>{{ product.year }}</td>
-                <td><img src="{{ product.img }}" alt="{{ product.brand }},{{ product.model }}" style="max-width: 200px;"> </td>
+                <td><img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}" style="max-width: 200px;"> </td>
                 <td>{{ product.shortDescription }}</td>
                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{ product.id }}">
                     Voir la description Complète

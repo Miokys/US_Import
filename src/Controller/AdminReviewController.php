@@ -71,7 +71,7 @@ class AdminReviewController extends AbstractController
     #[Route('/{id}', name: 'app_admin_review_delete', methods: ['POST'])]
     public function delete(Request $request, Review $review, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$review->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $review->getId(), $request->request->get('_token'))) {
             $entityManager->remove($review);
             $entityManager->flush();
         }

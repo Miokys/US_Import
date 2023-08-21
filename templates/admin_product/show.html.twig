@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <th>Img</th>
-                <td>{{ product.img }}</td>
+                <td><img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}"></td>
             </tr>
             <tr>
                 <th>ShortDescription</th>

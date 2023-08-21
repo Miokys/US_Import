@@ -14,10 +14,7 @@ class ReviewType extends AbstractType
         $builder
             ->add('note')
             ->add('content')
-            ->add('createdAt')
-            ->add('product')
-            ->add('user')
-        ;
+            ->add('user');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

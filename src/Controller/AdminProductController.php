@@ -7,10 +7,13 @@ use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use ErrorException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 #[Route('/admin/product')]
 class AdminProductController extends AbstractController
@@ -31,10 +34,34 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($product);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $image = $form->get('img')->getData();
+
+                if ($image) {
+                    $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                    $finalImage = $originalFilename . '.' . $image->guessExtension();
+
+                    try {
+                        $image->move(
+                            $this->getParameter('image_directory'),
+                            $finalImage
+                        );
+                    } catch (FileException $e) {
+                        throw new ErrorException("un problème est survenue lors de l'upload de l'image");
+                    }
+
+                    $product->setImg($finalImage);
+                }
+
+                $entityManager->persist($product);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre produit a bien été ajouté');
+
+                return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->render('admin_product/new.html.twig', [
@@ -70,13 +97,19 @@ class AdminProductController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'app_admin_product_delete', methods: ['POST'])]
-    public function deleteProduct(ManagerRegistry $doctrine, Product $product)
+    public function deleteProduct(ManagerRegistry $doctrine, Product $product): RedirectResponse
     {
         $entityManager = $doctrine->getManager();
+
+        $reviews = $product->getReview();
+        foreach ($reviews as $review) {
+            $entityManager->remove($review);
+        }
+
         $entityManager->remove($product);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Le produit a bien été supprimé');
+        $this->addFlash('success', 'Le produit et ses avis ont bien été supprimés');
 
         return $this->redirectToRoute('app_admin_product_index');
     }

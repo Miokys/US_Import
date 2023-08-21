@@ -1,51 +1,61 @@
 <header>
-        <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+
+        <nav class="navbar navbar-expand-lg bg-secondary border-bottom border-body" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="">USImport</a>
+                <a class="navbar-brand" href="{{ path('app_home') }}"><img class="navimg" src="{{ asset('assets/medias/img/logo.png') }}" alt="USImport"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                
+                <div class="collapse navbar-collapse text-center p-2" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                        <!-- Liens de la Navbar -->
                         <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link fs-3 text-dark" href="{{ path('app_category_index') }}">Categories</a>
                         </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="">Produits</a>
-                        </li>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="">Categories</a></li>
-                                <li><a class="dropdown-item" href="">Produits</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        {% endif %}
+                        <!--Menu Admin -->
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item dropdown">
+                                <a class="nav-link fs-3 dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ path('app_admin_category_index') }}">Categories</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_admin_product_index') }}">Produits</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_admin_user_index') }}">Utilisateurs</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_admin_review_index') }}">Avis Utilisateurs</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            {% endif %}
                     </ul>
-                    <form class="d-flex ms-auto" role="search" action="" method="GET">
-                        <input class="form-control me-2" name="search" type="search" placeholder="Rechercher" aria-label="Search">
-                        <button class="btn btn-outline-secondary" type="submit">
+                    <!-- fin des liens de la Navbar -->
+
+                    <!-- Barre de Recherche -->
+                    <form class="nav-form" role="search" action="{{ path('app_lookup') }}" method="GET">
+                        <input class="nav-form-input" name="search" type="search" placeholder="Rechercher" aria-label="Search">
+                        <button class="nav-form-btn" type="submit">
                             <i class="bi bi-search"></i>
                         </button>
-                    </form>
-                    <form class="d-flex mx-2">
-                        <a class="btn btn-outline-light" href="">
+                    </form> 
+                    <!-- Fin de la Barre de Recherche -->
+
+                    <!-- Boutons de panier et de Connexion -->
+                    <div class="nav-btn">
+                        <a class="btn-cart" href="{{ path("app_cart") }}">
                             <i class="bi-cart-fill me-1"></i>
-                            Panier
-                            <span class="badge text-white ms-2 rounded-pill">
-                            {{ app.session.get('panier') ? app.session.get('panier')|length : '0' }}
-                            </span>
+                            Panier {{ app.session.get('panier') ? app.session.get('panier')|length : '0' }}
                         </a>
-                    </form>
                     {% if is_granted('ROLE_USER') %}
-                        <a href={{ path('app_logout') }} class="btn btn-outline-primary">Se déconnecter</a>
+                        <a href={{ path('app_logout') }} class="btn-log">
+                            <i class="bi bi-box-arrow-left"></i> 
+                            Se déconnecter
+                        </a>
                     {% else %}
-                        <a href={{ path('app_login') }} class="btn btn-outline-primary">Se connecter</a>
+                        <a href={{ path('app_login') }} class="btn-log"><i class="bi bi-box-arrow-in-right"></i> Se connecter</a>
                     {% endif %}
+                    <!-- fin des boutons -->
+                    </div>
                 </div>
             </div>
         </nav>

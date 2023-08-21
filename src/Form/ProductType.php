@@ -6,6 +6,8 @@ use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProductType extends AbstractType
 {
@@ -15,7 +17,21 @@ class ProductType extends AbstractType
             ->add('brand')
             ->add('model')
             ->add('price')
-            ->add('img')
+            ->add('img', FileType::class, [
+                'label' => 'Image',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '200000000k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png'
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader un fichier jpg ou png'
+                    ])
+                ]
+            ])
             ->add('shortDescription')
             ->add('fullDescription')
             ->add('year')

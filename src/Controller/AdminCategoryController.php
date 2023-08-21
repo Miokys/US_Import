@@ -73,6 +73,12 @@ class AdminCategoryController extends AbstractController
     public function deleteCategory(ManagerRegistry $doctrine, Category $category)
     {
         $entityManager = $doctrine->getManager();
+
+        $products = $category->getProduct();
+        foreach ($products as $product) {
+            $entityManager->remove($product);
+        }
+
         $entityManager->remove($category);
         $entityManager->flush();
 

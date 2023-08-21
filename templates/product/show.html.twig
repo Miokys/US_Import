@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <h1>Product</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ product.brand }}</td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td>{{ product.model }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <th>Img</th>
+                <td><img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}"></td>
+            </tr>
+            <tr>
+                <th>ShortDescription</th>
+                <td>{{ product.shortDescription }}</td>
+            </tr>
+            <tr>
+                <th>FullDescription</th>
+                <td>{{ product.fullDescription }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ product.year }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        
+        <a href="{{ path('app_cart_add', {id: product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+        <a class="btn btn-outline-info" href="{{ path("app_review_new", {'id': product.id}) }}"> Ajouter un commentaire</a>
+    </div>
+
+<div class="container">
+<h4 class="text-center">Commentaires</h4>
+
+    {% for review in product.review %}
+        <div class="container border m-2">
+        <h5>{{ review.user.name }}</h5>
+        <p>
+            {{ review.note }}
+            {{ review.content }}
+        </p>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
