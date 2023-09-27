@@ -3,7 +3,8 @@
 {% block title %}Réinitialiser votre mot de passe{% endblock %}
 
 {% block body %}
-<div class="container">
+<body class="bg-1">
+    <div class="container form-bg tables mx-auto my-5">
     {% for flash_error in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
@@ -19,5 +20,6 @@
 
         <button class="btn btn-primary">Recevoir le lien de réinitialisation du mot de passe</button>
     {{ form_end(requestForm) }}
-</div>
+    </div>
+</body>
 {% endblock %}

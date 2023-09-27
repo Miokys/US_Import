@@ -4,11 +4,13 @@
 
 {% block body %}
 
-<div class="continer">
-    <p>
-        Si un compte existe avec cette adresse Mail, un lien pour réinitialiser le mot de passe à été envoyé.
-        Ce est valide jusqu'a {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-    </p>
-    <p>Si vous n'avez pas reçu de mail, vérifier vos spam, ou que vous avez bien rentrer la bonne adresse mail sinon <a href="{{ path('app_forgot_password_request') }}">réesayez</a>.</p>
-</div>
+<body class="bg-1">
+    <div class="container form-bg tables mx-auto my-5">
+        <p>
+            Si un compte existe avec cette adresse Mail, un lien pour réinitialiser le mot de passe à été envoyé.
+            Ce est valide pendant {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+        </p>
+        <p>Si vous n'avez pas reçu de mail, vérifier vos spam, ou que vous avez bien rentrer la bonne adresse mail sinon <a href="{{ path('app_forgot_password_request') }}">réesayez</a>.</p>
+    </div>
+</body>
 {% endblock %}

@@ -6,9 +6,8 @@
 
 {% block body %}
 <body class="bg-1">
-  
-<div class="container my-4 bg-light">
-    <h1>Commande Validée</h1>
+    <div class="container form-bg tables mx-auto my-5">
+    <h1 class="text-center my-4 m-auto text-light border-bottom border-danger col-5">Commande Validée</h1>
 
     <p>Votre commande a étée validée, vous recevrez un mail de Confirmation.
     Merci pour vote confiance.</p>
@@ -17,7 +16,7 @@
     {% if panier_data is empty %}
         <p>Aucun produit dans la commande.</p>
     {% else %}
-        <table class="table mt-4 table-striped">
+        <table class="table-responsive col-12">
             <thead>
                 <tr>
                 <th scope="col">Article</th>
