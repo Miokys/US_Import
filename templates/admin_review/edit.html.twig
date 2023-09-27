@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Review{% endblock %}
+{% block title %}Modifier un commentaire{% endblock %}
 
 {% block body %}
-    <h1>Edit Review</h1>
+<body class="bg-4">
+    <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center m-5">Modification de Commentaire</h1>
+        <div class="container col-10">
+        {{ include('admin_review/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        </div>
 
-    {{ include('admin_review/_form.html.twig', {'button_label': 'Update'}) }}
+        <div class="container d-flex justify-content-center">
+        {{ include('admin_review/_delete_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_admin_review_index') }}">back to list</a>
-
-    {{ include('admin_review/_delete_form.html.twig') }}
+        <div class="d-flex justify-content-end mt-5">
+            <a class="btn btn-outline-light mx-3" href="{{ path('app_admin_review_index') }}">Retour à la liste</a>
+        </div>
+    </div>
+</body>
 {% endblock %}

@@ -3,9 +3,10 @@
 {% block title %}Liste des Catégories{% endblock %}
 
 {% block body %}
-    <h1 class="text-center m-3">Liste des Catégories</h1>
-<div class="container">
-    <table class="table">
+<body class="bg-1">
+<div class="container form-bg tables mx-auto my-5">
+    <h1 class="text-center m-5 text-light mx-auto col-6 border-bottom border-danger">Liste des Catégories</h1>
+    <table class="mb-5 col-12">
         <thead>
             <tr>
                 <th></th>
@@ -15,7 +16,7 @@
         <tbody>
         {% for category in categories %}
             <tr class="text-end">
-                <td>{{ category.name }}</td>
+                <td class="fs-5">{{ category.name }}</td>
                 <td class=" d-flex justify-content-center">
                     <a class="btn btn-outline-info" href="{{ path('app_category_show', {'id': category.id}) }}">Voir les Articles</a>
                 </td>
@@ -28,4 +29,5 @@
         </tbody>
     </table>
 </div>
+</body>
 {% endblock %}

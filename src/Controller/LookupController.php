@@ -19,7 +19,7 @@ class LookupController extends AbstractController
         return $this->render('lookup/index.html.twig', [
             'controller_name' => 'LookupController',
             'products' => $products,
-            'searchTerm' => $searchTerm, // Optional: Pass the search term to the view if you want to display it.
+            'searchTerm' => $searchTerm,
         ]);
     }
 }

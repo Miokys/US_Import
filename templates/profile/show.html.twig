@@ -1,44 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Compte utilisateur{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+<body class="bg-1">
+    <div class="container form-bg tables mx-auto my-5">
+            <h1 class="text-center my-4 m-auto text-light border-bottom border-danger col-5">Votre compte</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.name }}</td>
-            </tr>
-            <tr>
-                <th>Prénom</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ user.adress }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.city }}</td>
-            </tr>
-            <tr>
-                <th>Code Postal</th>
-                <td>{{ user.zip }}</td>
-            </tr>
-            <tr>
-                <th>Date de naissance</th>
-                <td>{{ user.birthdate ? user.birthdate|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-<div class="container my-3 m-auto text-center">
-    <a class="btn btn-outline-info col-6" href="{{ path('app_profile_edit', {'id': user.id}) }}">edit</a>
-</div>
+        <table class="table-responsive col-12">
+            <tbody>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ user.name }}</td>
+                </tr>
+                <tr>
+                    <th>Prénom</th>
+                    <td>{{ user.firstname }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ user.adress }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ user.city }}</td>
+                </tr>
+                <tr>
+                    <th>Code Postal</th>
+                    <td>{{ user.zip }}</td>
+                </tr>
+                <tr>
+                    <th>Date de naissance</th>
+                    <td>{{ user.birthdate ? user.birthdate|date('d / m / Y') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="container my-3 m-auto text-center">
+            <a class="btn btn-outline-success col-3" href="{{ path('app_order_view') }}">Mes Commandes</a><a class="btn btn-outline-info col-3 mx-3" href="{{ path('app_profile_edit', {'id': user.id}) }}">Modifier le profile</a><a class="btn btn-outline-danger col-3" href="{{ path('app_forgot_password_request', {'id': user.id}) }}">Reinitialiser le mot de passe</a>
+        </div>
+    </div>
 
+</body>
 {% endblock %}

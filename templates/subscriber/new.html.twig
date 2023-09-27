@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvel Utilisateur{% endblock %}
+{% block title %}Inscription à la newsletter{% endblock %}
 
 {% block body %}
-    <h1>Créer un nouvel Uutilisateur</h1>
+<body class="bg-1">
+    <div class="container form-bg tables mx-auto my-5">
+            <h1 class="text-center my-4 m-auto text-light border-bottom border-danger col-5">S'inscrire à la Newletter</h1>
 
     {{ include('subscriber/_form.html.twig') }}
+    </div>
+</body>
 
 {% endblock %}

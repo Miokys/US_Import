@@ -1,9 +1,12 @@
-<h1>Hi!</h1>
+<div class="container">
+<h1>Bonjour</h1>
 
-<p>To reset your password, please visit the following link</p>
+<p>Vous avez demande une Réinitialisation de mot de passe, veuillez cliquer sur le lien ci-dessous pour créer un nouveau mot de passe.</p>
 
 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+<p>Ce lien Expire le {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
 
-<p>Cheers!</p>
+<p>Cordialement,
+l'équipe USImport</p>
+</div>

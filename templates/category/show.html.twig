@@ -3,30 +3,34 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1 class="text-center fs-2 m-4">Categorie {{ category.name }}</h1>  
+<body class="bg-1">
+<div class="container form-bg tables mx-auto my-5">
+    <h1 class="text-center fs-2 m-4 my-5 mx-auto col-6 border-bottom border-danger">Véhicules de la Categorie {{ category.name }}</h1>  
   
     <div class="container d-flex justify-content-around">
         {% for product in products %}
-            <div class="card" style="width: 18rem;">
+            <div class="card bg-dark-subtle" style="width: 18rem;">
                 <img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.brand }} {{ product.model }} {{ product.year }}</h5>
-                    <p class="card-text">{{ product.shortDescription }}</p>
+                    <h5 class="card-title text-center">{{ product.brand }} {{ product.model }} {{ product.year }}</h5>
+                    <p class="card-text text-center">{{ product.shortDescription }}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ product.price|number_format(0, " "," ") }} €</li>
+                    <li class="list-group-item bg-dark-subtle fs-5">{{ product.price|number_format(0, " "," ") }} €</li>
                 </ul>
-                <div class="card-body">
+                <div class="card-body text-end">
                     <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-outline-primary">Voir le vehicule</a>
                 </div>
             </div>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Aucun Véhicule disponible dans cette Catégorie</td>
             </tr>
         {% endfor %}
     </div>
-    <div class="container m-5">
-        <a class="btn btn-outline-secondary col-8" href="{{ path('app_category_index') }}">Retour à la liste</a>
+    <div class="container m-auto my-3 col-8 text-center">
+        <a class="btn btn-outline-info col-8" href="{{ path('app_category_index') }}">Retour à la liste</a>
     </div>
+</div>
+</body>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,10 +15,19 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('mail', EmailType::class)
-            ->add('content', TextareaType::class)
+            ->add('nom', TextType::class,[
+                'required' => true,
+            ])
+            ->add('prenom', TextType::class, [
+                'required' => true,
+            ])
+            ->add('mail', EmailType::class,[
+                'required' => true,
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Message',
+                'required' => true,
+            ])
             ->add('submit', SubmitType::class);
     }
 

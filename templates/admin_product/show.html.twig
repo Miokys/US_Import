@@ -12,39 +12,39 @@
                 <td>{{ product.id }}</td>
             </tr>
             <tr>
-                <th>Brand</th>
+                <th>marque</th>
                 <td>{{ product.brand }}</td>
             </tr>
             <tr>
-                <th>Model</th>
+                <th>Modèle</th>
                 <td>{{ product.model }}</td>
             </tr>
             <tr>
-                <th>Price</th>
+                <th>Prix</th>
                 <td>{{ product.price }}</td>
             </tr>
             <tr>
-                <th>Img</th>
+                <th>Image</th>
                 <td><img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}"></td>
             </tr>
             <tr>
-                <th>ShortDescription</th>
+                <th>Description Courte</th>
                 <td>{{ product.shortDescription }}</td>
             </tr>
             <tr>
-                <th>FullDescription</th>
+                <th>Description détaillée</th>
                 <td>{{ product.fullDescription }}</td>
             </tr>
             <tr>
-                <th>Year</th>
+                <th>Année de production</th>
                 <td>{{ product.year }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_product_index') }}">back to list</a>
+    <a href="{{ path('app_admin_product_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('app_admin_product_edit', {'id': product.id}) }}">edit</a>
+    <a href="{{ path('app_admin_product_edit', {'id': product.id}) }}">editer</a>
 
     {{ include('admin_product/_delete_form.html.twig') }}
 {% endblock %}

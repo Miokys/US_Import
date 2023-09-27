@@ -3,14 +3,17 @@
 {% block title %}USImport - Panier{% endblock %}
 
 {% block body %}
-<h1>Votre Panier</h1>
+<body class="bg-1">
+    
+<div class="container form-bg tables mx-auto my-5">
+<h1 class="text-center my-4 m-auto text-light border-bottom border-danger col-5">Votre Panier</h1>
 {% if items is empty %}
-    <p>Votre panier est vide</p>
+    <p class="text-center">Votre panier est vide</p>
 {% else %}
 
     <div class="container">
     
-        <table class="table mt-4 table-striped">
+        <table class="table-responsive col-12">
             <thead>
                 <tr>
                 <th scope="col">Article</th>
@@ -21,7 +24,7 @@
                 <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody class="table-group-divider">
+            <tbody>
             {% for item in items %}
                 <tr>
                     <td class="align-middle ">{{ item.product.brand }}, {{ item.product.model }}</td>
@@ -49,4 +52,6 @@
 
     </div>
 {% endif %}
+</div>
+</body>
 {% endblock %}

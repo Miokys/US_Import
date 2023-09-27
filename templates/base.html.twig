@@ -18,14 +18,14 @@
         {% block javascripts %}
         {% endblock %}
     </head>
-
-    {% include "nav.html.twig" %}
         {% for message in app.flashes('success') %}
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <p>{{ message }}</p> 
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         {% endfor %}
+
+    {% include "nav.html.twig" %}
         {% block body %}
     <body>
         {% endblock %}

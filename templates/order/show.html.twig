@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de la Commande{% endblock %}
+
+{% block body %}
+<body class="bg-1">
+        <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center m-auto my-4 text-light border-bottom border-danger col-5">Détail de la Commande</h1>
+<div class="d-flex align-items-end flex-column mb-3 mx-5">
+        <table class="table-responsive text-end">
+            <tr>
+                <th class="col">Numéro de Commande</th>
+                <td class="col">{{ order.id }}</td>
+            </tr>
+            <tr>
+                <th class="col">Date de Commande</th>
+                <td class="col">{{ order.orderDate|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Montant Total</th>
+                <td>{{ order.totalAmount|number_format(0,',',' ') }} €</td>
+            </tr>
+        </table>
+</div>
+
+        <div class=" mt-5">
+            <h2 class="text-center m-5 text-light">Contenu de la Commande</h2>
+            <table class="table-responsive text-center col-12">
+                <thead>
+                    <tr>
+                        <th>Marque/Modèle</th>
+                        <th>image</th>
+                        <th>Année</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td class="align-middle ">{{ item.brand }}, {{ item.model }}</td>
+                            <td class="align-middle"><img src="{{ asset('/uploads/img/') }}{{ item.img }}" style="height: 80px; width: 120px" alt={{ item.model }}></td>
+                            <td class="align-middle">{{ item.year }}</td>
+                            <td class="align-middle">{{ item.price|number_format(0,',',' ') }} €</td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-outline-primary my-4" href="{{ path('app_order_view') }}">Retour à la liste</a>
+    </div>
+</body>
+{% endblock %}

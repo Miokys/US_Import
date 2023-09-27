@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Commandes{% endblock %}
+
+{% block body %}
+<body class="bg-1">
+    <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center m-auto my-4 text-light border-bottom border-danger col-5">Mes Commandes</h1>
+
+        {% if orders is empty %}
+        <div class="text-center">
+            <p>Vous n'avez aucune commande pour le moment.</p>
+        </div>
+        {% else %}
+            <table class="table-responsive col-12 text-center">
+                <thead>
+                    <tr>
+                        <th>Numéro de Commande</th>
+                        <th>Date de Commande</th>
+                        <th>Montant Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.orderDate|date('d/m/Y') }}</td>
+                            <td>{{ order.totalAmount|number_format(0,',',' ') }} €</td>
+                            <td><a href="{{ path('app_order_detail', {'id': order.id}) }}" class="btn btn-primary">Voir la commande</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        <a class="btn btn-outline-primary col-2 my-4" href="{{ path('app_profile_show') }}">Retour au Profil</a> 
+    </div>
+</body>
+{% endblock %}

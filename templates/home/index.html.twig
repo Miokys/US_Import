@@ -3,23 +3,25 @@
 {% block title %}USImport - Accueil{% endblock %}
 
 {% block body %}
-    <div class="card">
-        <div class="card-header">
-            <img style="width: 100%;" src="{{ asset('assets/medias/img/home-presentation.jpg') }}" alt="">
+<body class="bg-dark">
+    
+    <div class="bg-dark">
+        <div>
+            <img class="pres-img" src="{{ asset('assets/medias/img/home-presentation.jpg') }}" alt="">
         </div>
-        <div class="card-body bg-dark text-white text-center">
-            <h5 class="card-title fs-1">Qui somme-nous ?</h5>
-            <p class="card-text fs-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis et totam eligendi ipsam esse tenetur consectetur ab alias non, libero labore, enim maiores architecto odit, perspiciatis laborum! Ab quis quidem sed quas odit expedita nihil, dolor qui dolorem esse unde porro praesentium hic obcaecati pariatur aspernatur atque nam dicta perferendis.</p>
+        <div class="text-center mt-5 pres-descr">
+            <h5 class="text-center text-white my-5 mx-auto fs-1 border-bottom border-danger col-5">Qui somme-nous ?</h5>
+            <p class="fs-5 text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis et totam eligendi ipsam esse tenetur consectetur ab alias non, libero labore, enim maiores architecto odit, perspiciatis laborum! Ab quis quidem sed quas odit expedita nihil, dolor qui dolorem esse unde porro praesentium hic obcaecati pariatur aspernatur atque nam dicta perferendis.</p>
         </div>
     </div>
 
     <div id="carouselExampleAutoplaying" class="carousel slide m-2" data-bs-ride="carousel">
-    <h3 class="text-center m-5 fs-1">Nos Modèles</h3>
+    <h3 class="text-center text-white my-5 mx-auto fs-1 border-bottom border-danger col-3">Nos Modèles</h3>
         <div class="carousel-inner">
 {% for product in products %}
         <a href="{{ path('app_product_show', {'id': product.id}) }}">
             <div class="carousel-item {% if loop.index0 == 0 %} active {% endif %}">
-                <img style="max-width: 1500px;" src="{{ asset('/uploads/img/') }}{{ product.img }}" " class="d-block w-100 mx-auto" alt="{{ product.brand }}{{ product.model }}{{ product.year }}">
+                <img style="max-width: 1500px;" src="{{ asset('/uploads/img/') }}{{ product.img }}" class="d-block w-100 mx-auto" alt="{{ product.brand }}{{ product.model }}{{ product.year }}">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{ product.brand }} {{ product.model }} {{ product.year }}</h5>
                     <p>{{ product.shortDescription }}</p>
@@ -29,4 +31,5 @@
 {% endfor %}
         </div>
     </div>
+</body>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Entity\Product;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,9 +55,7 @@ class PaymentController extends AbstractController
         $session = Session::create([
             'line_items' => [$line_items],
             'mode' => 'payment',
-            'success_url' => $this->generateUrl('app_payment_checkout_success', [
-                'panier_data' => $panier_data
-            ], UrlGeneratorInterface::ABSOLUTE_URL),
+            'success_url' => $this->generateUrl('app_payment_checkout_success', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url' => $this->generateUrl('app_payment_checkout_cancel', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
 
@@ -64,15 +63,52 @@ class PaymentController extends AbstractController
     }
 
     #[Route('/checkout/success', name: 'app_payment_checkout_success')]
-    public function checkoutSuccess(SessionInterface $session)
+    public function checkoutSuccess(SessionInterface $session, ManagerRegistry $doctrine)
     {
-        $panier_data = $session->get('panier_data', []);
-        $session->remove('panier_data');
-        $session->remove('panier');
+        $panier = $session->get('panier', []);
+        $panier_data = []; // Initialisez le tableau $panier_data
+        $totalquantity = 0;
+        $totalprice = 0;
 
+        if (!empty($panier)) {
+            $order = new Order();
+                    
+        foreach ($panier as $id => $quantity) {
+            $panier_data[] = [
+                "product" => $doctrine->getRepository(Product::class)->find($id),
+                "quantity" => $quantity
+            ];
+            
+            $order->addProduct($doctrine->getRepository(Product::class)->find($id));
+            $totalquantity += $quantity;
+        }
+
+        foreach ($panier_data as $id => $value) // ajouter le prix du produit dans le total.
+        {
+            $totalprice += $value['product']->getPrice() * $value['quantity'];
+        }
+        
+        // Créez une instance de la classe Order si nécessaire
+        // dd($panier_data);
+        $entityManager = $doctrine->getManager();
+        $order->setOrderDate(new \DateTime());
+
+        $user = $this->getUser();
+        $order->setUser($user);
+
+        $order->setTotalAmount($totalprice);
+
+        $entityManager->persist($order);
+        $entityManager->flush();    
+        
+        $session->remove('panier');
+        }
+        
         return $this->render('payment/success.html.twig', [
             'controller_name' => 'PaymentController',
-            'panier_data' => $panier_data
+            'panier_data' => $panier_data,
+            'totalquantity' => $totalquantity,
+            'totalprice' => $totalprice
         ]);
     }
 

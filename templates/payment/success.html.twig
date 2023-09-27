@@ -1,11 +1,57 @@
+{# templates/payment/success.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>erci pour votre commande</h1>
-    <p>
-      Votre commande a bien été Validée,
-      Si vous avez besoin d'informations complémentaires contactez-nous
-      <a href="{{ path('app_contact') }}">Ici</a>.
-    </p>
+{% block title %}Checkout Success{% endblock %}
 
+{% block body %}
+<body class="bg-1">
+  
+<div class="container my-4 bg-light">
+    <h1>Commande Validée</h1>
+
+    <p>Votre commande a étée validée, vous recevrez un mail de Confirmation.
+    Merci pour vote confiance.</p>
+
+    <h2>Détails de la commande</h2>
+    {% if panier_data is empty %}
+        <p>Aucun produit dans la commande.</p>
+    {% else %}
+        <table class="table mt-4 table-striped">
+            <thead>
+                <tr>
+                <th scope="col">Article</th>
+                <th scope="col">image</th>
+                <th scope="col">Prix (€)</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Total (€)</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            {% for item in panier_data %}
+                <tr>
+                    <td class="align-middle ">{{ item.product.brand }}, {{ item.product.model }}</td>
+                    <td class="align-middle"><img src="{{ asset('/uploads/img/') }}{{ item.product.img }}" style="height: 80px; width: 120px" alt={{ item.product.model }}></td>
+                    <td class="align-middle">{{ item.product.price|number_format(0,',',' ') }} €</td>
+                    <td class="align-middle">{{ item.quantity }}</td>
+                    <td class="align-middle">{{ (item.product.price * item.quantity)|number_format(0,',',' ') }} €</td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot class="table-dark">
+                <tr>
+                    <td colspan="3" scope="row">TOTAL</td>
+                    <td>{{ totalquantity }}</td>
+                    <td>{{ totalprice|number_format(0,',',' ') }} €</td>
+                </tr>
+            </tfoot>
+        </table>
+    {% endif %}
+    
+    {# If you need to display order details, uncomment the following section and make sure you have the 'order' variable available. #}
+    {# <h2>Order Summary</h2> #}
+    {# <p>Order ID: {{ order.id }}</p> #}
+    {# <p>Total Price: {{ order.totalPrice }}</p> #}
+</div>
+</body>
 {% endblock %}

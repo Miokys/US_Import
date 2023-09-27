@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Product{% endblock %}
+{% block title %}Nouveau Véhicule{% endblock %}
 
 {% block body %}
-    <body class="bg-2">
+<body class="bg-2">
     <div class="container form-bg tables mx-auto my-5">
-        <h1 class="text-center m-5">Edition de Produit</h1>
-    <div class="container col-10">
-        {{ include('admin_product/_form.html.twig', {'button_label': 'Ajouter le véhicule'}) }}
-            </div>
-            <div class="d-flex justify-content-end">
-                <a class="btn btn-outline-light my-2 d-flex justify-content-end mb-5" href="{{ path('app_admin_product_index') }}">Retour à la liste</a>
-            </div>
+        <h1 class="text-center m-5">Ajouter un véhicule</h1>
+        <div class="container col-10">
+            {{ include('admin_product/_form.html.twig', {'button_label': 'Ajouter le véhicule'}) }}
         </div>
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-outline-light my-2 d-flex justify-content-end mb-5" href="{{ path('app_admin_product_index') }}">Retour à la liste</a>
+        </div>
+    </div>
 {% endblock %}

@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LookupController!{% endblock %}
+{% block title %}Recherche{% endblock %}
 
 {% block body %}
     <div class="container d-flex justify-content-around my-5">
+    <h1>Résultat pour votre recherche</h1>
         {% for product in products %}
             <div class="card" style="width: 18rem;">
                 <img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}" class="card-img-top">
@@ -20,7 +21,7 @@
             </div>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Désoslé, nous n'avons trouvé aucun résultat pour cette recherche.</td>
             </tr>
         {% endfor %}
     </div>

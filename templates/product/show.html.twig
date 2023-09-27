@@ -1,58 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %}{{ product.brand }} {{ product.model }}{% endblock %}
 
 {% block body %}
-    <h1>Product</h1>
+<body class="bg-1">
+    <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center my-4 m-auto text-light border-bottom border-danger col-5">{{ product.brand }} {{ product.model }} {{ product.year }}</h1>
 
-    <table class="table text-center">
-        <tbody>
-            <tr>
-                <th>Marque</th>
-                <td>{{ product.brand }}</td>
-            </tr>
-            <tr>
-                <th>Modèle</th>
-                <td>{{ product.model }}</td>
-            </tr>
-            <tr>
-                <th>année</th>
-                <td>{{ product.year }}</td>
-            </tr>
-            <tr>
-                <th>prix</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>Photos</th>
-                <td><img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}"></td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ product.fullDescription }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="container text-center">        
-        <a href="{{ path('app_cart_add', {id: product.id}) }}" class="btn btn-outline-primary">Ajouter au panier</a>
-        <a class="btn btn-outline-info" href="{{ path("app_contact", {'id': product.id}) }}"> Nous contacter</a>
-    </div>
-
-<div class="container mt-5 text-center">
-        <a class="btn btn-outline-secondary" href="{{ path("app_review_new", {'id': product.id}) }}"> Ajouter un commentaire</a>
-<h4 class="text-center m-3">Commentaires</h4>
-
-    {% for review in product.review %}
-        <div class="container border m-2">
-        <h5>{{ review.user.name }}</h5>
-        <p>
-            {{ review.note }}
-            {{ review.content }}
-        </p>
+        <div class="text-center">
+            <img class="m-3" style="max-width: 50vw;" src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}">
+        <p class="mx-3">{{ product.fullDescription }}</p>
         </div>
-    {% endfor %}
+        <p class="text-center fs-1 m-4" style="color: crimson; ">{{ product.price|number_format(0,',',' ') }} €</p>
+<div class="">
+        <div class="text-center">        
+            <a href="{{ path('app_cart_add', {id: product.id}) }}" class="btn btn-outline-primary">Ajouter au panier</a>
+            <a class="btn btn-outline-info" href="{{ path("app_contact", {'id': product.id}) }}"> Nous contacter</a>
+        </div>
+
+        <div class="mt-5 text-center">
+                <a class="btn btn-outline-secondary" href="{{ path("app_review_new", {'id': product.id}) }}"> Ajouter un commentaire</a>
+                    <h4 class="text-center m-3">Commentaires</h4>
+
+                <div class="container border m-2">
+            {% for review in product.review %}
+            <div class="text-center my-4 m-auto text-light border-bottom border-danger col-5">
+                    <h5 style="font-variant-caps: all-small-caps;">{{ review.user.name }}</h5>
+                    <p>
+                        {{ review.note }} <br>
+                        {{ review.content }}
+                    </p>
+            </div>
+            {% endfor %}
+                </div>
+        </div>
+
+
+    </div>
 </div>
-
-
+</body>
 {% endblock %}

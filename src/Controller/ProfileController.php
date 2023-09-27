@@ -35,10 +35,6 @@ class ProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $plaintextPassword = $form->get('plainPassword')->getData();
-            $hashedPassword = $passwordHasher->hashPassword($user, $plaintextPassword);
-            $user->setPassword($hashedPassword);
-
             $entityManager->persist($user);
             $entityManager->flush();
 

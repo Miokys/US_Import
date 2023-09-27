@@ -3,37 +3,45 @@
 {% block title %}Review index{% endblock %}
 
 {% block body %}
-    <h1>Review index</h1>
+<body class="bg-4">
+    <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center m-5 text-light">Liste des Commentaires</h1>
+        <div class="table-responsive">
+            <table class="mb-5 col-12">
+                <thead>
+                    <tr>
+                        <th class="fs-5">produit</th>
+                        <th class="fs-5">Note</th>
+                        <th class="fs-5">Message</th>
+                        <th class="fs-5">Utilisateur</th>
+                        <th class="fs-5">Date de création</th>
+                        <th class="fs-5 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for review in reviews %}
+                    <tr>
+                        <td class="fw-bold">{{ review.product }}</td>
+                        <td class="fw-bold">{{ review.note }}</td>
+                        <td class="fw-bold">{{ review.content }}</td>
+                        <td class="fw-bold">{{ review.user }}</td>
+                        <td class="fw-bold">{{ review.createdAt ? review.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a class="btn btn-primary m-1 col-12" href="{{ path('app_admin_review_edit', {'id': review.id}) }}">Modifier</a>
+                            <div class="m-1 col-12">
+                                {{ include('admin_review/_delete_form.html.twig')}}
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucun commentaire trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Note</th>
-                <th>Content</th>
-                <th>CreatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for review in reviews %}
-            <tr>
-                <td>{{ review.id }}</td>
-                <td>{{ review.note }}</td>
-                <td>{{ review.content }}</td>
-                <td>{{ review.createdAt ? review.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_admin_review_show', {'id': review.id}) }}">show</a>
-                    <a href="{{ path('app_admin_review_edit', {'id': review.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_admin_review_new') }}">Create new</a>
 {% endblock %}

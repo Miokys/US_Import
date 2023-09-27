@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Review{% endblock %}
+{% block title %}nouveau commentaire{% endblock %}
 
 {% block body %}
-    <h1>Create new Review</h1>
-
-    {{ include('admin_review/_form.html.twig') }}
-
-    <a href="{{ path('app_admin_review_index') }}">back to list</a>
+<body class="bg-2">
+    <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center m-5">Créer un commentaire</h1>
+        <div class="container col-10">
+            {{ include('admin_review/_form.html.twig', {'button_label': 'Créer le commentaire'}) }}
+        </div>
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-outline-light my-2 d-flex justify-content-end mb-5" href="{{ path('app_admin_review_index') }}">Retour à la liste</a>
+        </div>
+    </div>
+</body>
 {% endblock %}
