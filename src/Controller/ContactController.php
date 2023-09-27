@@ -23,11 +23,13 @@ class ContactController extends AbstractController
 
         $form->handleRequest($request);
 
+        $to = 'contact@nabais-daniel.fr';
+
         if ($form->isSubmitted() && $form->isValid()) { // si le formulaire est soumis et valide. traîtement de celui-ci.
 
             $email = (new TemplatedEmail()) // Création du mail à envoyer avec les information récupérée du formulaire.
                 ->from($contact->getMail())
-                ->to('you@example.com')
+                ->to($to)
                 ->subject('Demande de contact de : MR. ' . $contact->getNom() . ' ' . $contact->getPrenom())
                 ->text($contact->getContent())
                 ->htmlTemplate('emails/contact.html.twig')
