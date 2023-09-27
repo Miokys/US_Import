@@ -85,6 +85,25 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get('img')->getData();
+
+            if ($image) {
+                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $finalImage = $originalFilename . '.' . $image->guessExtension();
+
+                try {
+                    $image->move(
+                        $this->getParameter('image_directory'),
+                        $finalImage
+                    );
+                } catch (FileException $e) {
+                    throw new ErrorException("un problème est survenue lors de l'upload de l'image");
+                }
+
+                $product->setImg($finalImage);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_product_index', [], Response::HTTP_SEE_OTHER);

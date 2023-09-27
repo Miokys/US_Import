@@ -1,36 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}Liste des Catégories{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="col-2">Id</th>
-                <th class="col-6">Nom</th>
-                <th class="col-4">actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <a class="btn btn-outline-primary" href="{{ path('app_admin_category_edit', {'id': category.id}) }}">Modifier</a>
-                    <a class="btn btn-outline-danger" href="{{ path('app_admin_category_delete', {'id': category.id}) }}">Supprimer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<body class="bg-1">
+<div class="container form-bg tables mx-auto my-5">
+    <h1 class="text-center m-5 text-light">Liste des Catégories</h1>
+    <div class="container">
+        <table class="mb-5 col-12">
+            <thead>
+                <tr>
+                    <th class="col-2 fs-4">Id</th>
+                    <th class="col-6 fs-4">Nom</th>
+                    <th class="col-4 fs-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td class="fs-5">{{ category.id }}</td>
+                    <td class="fs-5">{{ category.name }}</td>
+                    <td>
+                    <div class="d-flex justify-content-start">
+                        <a class="btn btn-outline-primary mx-1" href="{{ path('app_admin_category_edit', {'id': category.id}) }}">Modifier</a>
+                        {{ include('admin_category/_delete_form.html.twig', {'button_label': 'supprimer'}) }}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune catégorie actuellement enregistrée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container m-auto my-3 text-center">
+        <a class="btn btn-success col-6" href="{{ path('app_admin_category_new') }}">Créer une nouvelle Catégorie</a>
+    </div>
 </div>
-
-    <a href="{{ path('app_admin_category_new') }}">Create new</a>
 {% endblock %}

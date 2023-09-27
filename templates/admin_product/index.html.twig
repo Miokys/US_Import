@@ -3,70 +3,55 @@
 {% block title %}Liste des produits{% endblock %}
 
 {% block body %}
-    <h1>Liste des produits</h1>
-<div class="container m-auto">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th class="col">Id</th>
-                <th class="col">Marque</th>
-                <th class="col">Modèle</th>
-                <th class="col">Année</th>
-                <th class="col">Image</th>
-                <th class="col">présentation</th>
-                <th class="col">Description Complète</th>
-                <th class="col-1">Prix</th>
-                <th class="col-2">actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.brand }}</td>
-                <td>{{ product.model }}</td>
-                <td>{{ product.year }}</td>
-                <td><img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}" style="max-width: 200px;"> </td>
-                <td>{{ product.shortDescription }}</td>
-                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{ product.id }}">
-                    Voir la description Complète
-                </button></td>
-                <td>{{ product.price|number_format(0,',',' ') }} €</td>
-                <td>
-                    <a class="btn btn-outline-warning m-1 col-12" href="{{ path('app_admin_product_edit', {'id': product.id}) }}">edit</a>
-                    <div class="m-1 col-12">
-                        {{ include('admin_product/_delete_form.html.twig') }}
-                    </div> 
-                </td>
-            </tr>
+<body class="bg-2">
+    <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center m-5 text-light">Liste des Catégories</h1>
+        <div class="table-responsive">
+            <table class="mb-5 col-12">
+                <thead>
+                    <tr>
+                        <th class="col">Id</th>
+                        <th class="col">Marque</th>
+                        <th class="col">Modèle</th>
+                        <th class="col">Année</th>
+                        <th class="col">Image</th>
+                        <th class="col">présentation</th>
+                        <th class="col">Description Complète</th>
+                        <th class="col-1">Prix</th>
+                        <th class="col-2">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.brand }}</td>
+                        <td>{{ product.model }}</td>
+                        <td>{{ product.year }}</td>
+                        <td><img src="{{ asset('/uploads/img/') }}{{ product.img }}" alt="{{ product.brand }},{{ product.model }}" style="max-width: 200px;"> </td>
+                        <td>{{ product.shortDescription }}</td>
+                        <td>{{ product.fullDescription|length > 50 ? product.fullDescription|slice(0, 50) ~ '...' : product.fullDescription  }}</td>
+                        <td>{{ product.price|number_format(0,',',' ') }} €</td>
+                        <td>
+                            <a class="btn btn-primary m-1 col-12" href="{{ path('app_admin_product_edit', {'id': product.id}) }}">Modifier</a>
+                            <div class="m-1 col-12">
+                                {{ include('admin_product/_delete_form.html.twig') }}
+                            </div> 
+                        </td>
+                    </tr>  
+                {% else %}
+                    <tr>
+                        <td colspan="9">Vous n'avez aucun produit enregistrés</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="container m-auto my-3 text-center">
+            <a class="mx-auto d-block btn btn-light col-6" href="{{ path('app_admin_product_new') }}">Ajouter un produit</a>
+        </div>
+    </div>
 
-            <div class="modal fade" id="modal{{ product.id }}" tabindex="-1" aria-labelledby="modal{{ product.id }}Label" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modal{{ product.id }}Label">{{ product.brand }} {{ product.model }} {{ product.year }}</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        {{ product.fullDescription }}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <tr>
-                <td colspan="9">Vous n'avez aucun produit enregistrés</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-<div class="container">
-    <a class="mx-auto d-block btn btn-outline-primary col-6" href="{{ path('app_admin_product_new') }}">Create new</a>
-</div>
+</body>
 
 {% endblock %}

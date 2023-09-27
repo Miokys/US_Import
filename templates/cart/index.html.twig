@@ -25,7 +25,7 @@
             {% for item in items %}
                 <tr>
                     <td class="align-middle ">{{ item.product.brand }}, {{ item.product.model }}</td>
-                    <td class="align-middle"><img src={{ item.product.img }} style="height: 80px; width: 120px" alt={{ item.product.model }}></td>
+                    <td class="align-middle"><img src="{{ asset('/uploads/img/') }}{{ item.product.img }}" style="height: 80px; width: 120px" alt={{ item.product.model }}></td>
                     <td class="align-middle">{{ item.product.price|number_format(0,',',' ') }} €</td>
                     <td class="align-middle"><a href="{{ path('app_cart_decrement', {id: item.product.id}) }}" type="button" class="link-primary link-underline link-underline-opacity-0" style="height: 5px; width: 5px;">-</a> {{ item.quantity }} <a href="{{ path('app_cart_increment', {id: item.product.id}) }}" type="button" class="link-primary link-underline link-underline-opacity-0" style="height: 5px; width: 5px;">+</a></td>
                     <td class="align-middle">{{ (item.product.price * item.quantity)|number_format(0,',',' ') }} €</td>

@@ -46,6 +46,18 @@ class Product
     #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'product')]
     private Collection $orders;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $img2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $img3 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $img4 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $img5 = null;
+
     public function __construct()
     {
         $this->review = new ArrayCollection();
@@ -213,5 +225,53 @@ class Product
     public function __toString()
     {
         return $this->brand . ' ' . $this->model . ' ' . $this->year;
+    }
+
+    public function getImg2(): ?string
+    {
+        return $this->img2;
+    }
+
+    public function setImg2(?string $img2): static
+    {
+        $this->img2 = $img2;
+
+        return $this;
+    }
+
+    public function getImg3(): ?string
+    {
+        return $this->img3;
+    }
+
+    public function setImg3(?string $img3): static
+    {
+        $this->img3 = $img3;
+
+        return $this;
+    }
+
+    public function getImg4(): ?string
+    {
+        return $this->img4;
+    }
+
+    public function setImg4(?string $img4): static
+    {
+        $this->img4 = $img4;
+
+        return $this;
+    }
+
+    public function getImg5(): ?string
+    {
+        return $this->img5;
+    }
+
+    public function setImg5(?string $img5): static
+    {
+        $this->img5 = $img5;
+
+        return $this;
     }
 }

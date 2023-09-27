@@ -1,17 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier un produit{% endblock %}
+{% block title %}Modifier un véhicule{% endblock %}
 
 {% block body %}
-    <h1>Modifier un produit</h1>
+<body class="bg-2">
+    <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center m-5">Modification de fiche véhicule</h1>
+        <div class="container col-10">
+            {{ include('admin_product/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        </div> 
+        
+        <div class="container d-flex justify-content-center">
+        {{ include('admin_product/_delete_form.html.twig') }}
+        </div>
 
-<div class="container">
-    {{ include('admin_product/_form.html.twig', {'button_label': 'Update'}) }}
-
-
-</div>
-<div class="container my-2">
-    {{ include('admin_product/_delete_form.html.twig') }}
-</div>
-    <a class="btn btn-success mx-3" href="{{ path('app_admin_product_index') }}">Retour à la liste</a>
+        <div class="d-flex justify-content-end mt-5">
+            <a class="btn btn-outline-light mx-3" href="{{ path('app_admin_product_index') }}">Retour à la liste</a>
+        </div>
+    </div>
+</body>
 {% endblock %}

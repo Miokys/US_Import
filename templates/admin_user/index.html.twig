@@ -3,22 +3,24 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
+<body class="bg-3">
+    <div class="container form-bg tables mx-auto my-5">
+        <h1 class="text-center m-5 text-light">Liste des Catégories</h1>
+        <div class="table-responsive">
+            <table class="mb-5 col-12">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Name</th>
-                <th>Firstname</th>
-                <th>Adress</th>
-                <th>City</th>
-                <th>Zip</th>
-                <th>Birthdate</th>
-                <th>IsVerified</th>
-                <th>actions</th>
+                <th class="col">Id</th>
+                <th class="col">Email</th>
+                <th class="col">Role</th>
+                <th class="col">Nom</th>
+                <th class="col">Prénom</th>
+                <th class="col">Adresse</th>
+                <th class="col">Ville</th>
+                <th class="col">Code postal</th>
+                <th class="col">Date de Naissance</th>
+                <th class="col">Verifié</th>
+                <th class="col-2">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -33,21 +35,26 @@
                 <td>{{ user.city }}</td>
                 <td>{{ user.zip }}</td>
                 <td>{{ user.birthdate ? user.birthdate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
                 <td>
+                    <a class="btn btn-primary m-1 col-12" href="{{ path('app_admin_user_edit', {'id': user.id}) }}">Modifier</a>
                     <div class="m-1 col-12">
                         {{ include('admin_user/_delete_form.html.twig') }}
                     </div>
-                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="12">no records found</td>
+                <td colspan="12">Aucun utilisateur trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    </div>
+    <div class="container m-auto my-3 text-center">
+            <a class="mx-auto d-block btn btn-light col-6" href="{{ path('app_admin_user_new') }}">Créer un nouvel utilisateur</a>
+        </div>
+    </div>
 
-    <a href="{{ path('app_admin_user_new') }}">Create new</a>
+</body>
 {% endblock %}

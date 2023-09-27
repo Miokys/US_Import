@@ -24,10 +24,14 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-
+<div class="container text-center m-auto justify-content-around my-3">
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Se connecter
     </button>
+    <a href="{{ path('app_register') }}" class="btn btn-lg btn-primary" type="submit">
+        S'inscrire
+    </a>
+</div>
     {% endif %}
 </form>
 </div>

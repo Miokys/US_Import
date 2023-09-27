@@ -1,6 +1,79 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
 .navbar{
     background: url('../medias/img/bannière.png') no-repeat;
     background-size: cover;
+}
+
+.bg-1{
+    background: url('../medias/img/dodge-srt-hellcat-dark-8a-1440x900.jpg') no-repeat;
+}
+
+.bg-2{
+    background: url('../medias/img/1959_Cadillac_El_Dorado_WATERMARKED_master.jpg') no-repeat;
+}
+
+.bg-3{
+    background: url('../medias/img/2024-Mustang-01.jpg') no-repeat;
+}
+
+.bg-1,.bg-2,.bg-3{
+    width: 100%;
+    background-size: cover;
+}
+
+.nav-link{
+    text-shadow: black 2px 2px;
+    font-family: 'Roboto', sans-serif;
+    color: #DB1803;
+}
+
+.nav-link:hover{
+    color: aliceblue;
+}
+
+.tables{
+    border-radius: 5px;
+    padding: 1rem;
+    background: rgba(66, 66, 66, 0.463);
+    backdrop-filter: blur(30px);
+}
+
+.tables{
+    color: aliceblue;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.tables thead tr {
+    background-color: #DB1803;
+    color: #ffffff;
+    text-align: left;
+}
+
+.tables th,
+.tables td {
+    padding: 12px 15px;
+}
+
+.tables tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.tables tbody tr:last-of-type {
+    border-bottom: 2px solid #DB1803;
+}
+
+.tables tbody tr.active-row {
+    font-weight: bold;
+    color: #DB1803;
 }
 
 .banner-img{
